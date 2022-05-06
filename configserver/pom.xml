@@ -9,12 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.optimagrowth</groupId>
-	<artifactId>licensing-service</artifactId>
+	<artifactId>configserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>License Service</name>
-	<description>Ostock Licensing Service</description>
+	<name>Config Server</name>
+	<description>Configuration Server</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>2021.0.2</spring-cloud.version>
 		<jib.maven-plugin-version>3.2.0</jib.maven-plugin-version>
 	</properties>
 	<dependencies>
@@ -23,30 +24,27 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -76,10 +74,10 @@
 					</jvmFlags>
 				</container>
 				</configuration>
-			</plugin>
+      		</plugin>
 		</plugins>
 	</build>
-	  <profiles>
+<profiles>
     <profile>
       <id>sync</id>
       <dependencies>
@@ -91,5 +89,4 @@
       </dependencies>
     </profile>
   </profiles>
-
 </project>

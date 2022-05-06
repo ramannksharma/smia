@@ -14,11 +14,22 @@ build:
         fromImage: gcr.io/distroless/java:debug
       sync:
         auto: true
+    - image: configserver
+      context: configserver
+      jib:
+        type: maven
+        args: 
+        - --no-transfer-progress
+        - -Psync
+        fromImage: gcr.io/distroless/java:debug
+      sync:
+        auto: true
   tagPolicy:
     sha256: {}
 deploy:
   kubectl:
     manifests:
       - ./k8s/license-service-deployment.yaml
+      - ./k8s/config-server-deployment.yaml
 
 
