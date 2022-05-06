@@ -1,0 +1,24 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: smia
+build:
+  artifacts:
+    - image: licensing-service
+      context: licensing-service
+      jib:
+        type: maven
+        args: 
+        - --no-transfer-progress
+        - -Psync
+        fromImage: gcr.io/distroless/java:debug
+      sync:
+        auto: true
+  tagPolicy:
+    sha256: {}
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/license-service-deployment.yaml
+
+

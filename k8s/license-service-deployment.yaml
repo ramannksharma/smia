@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: licensing-service
+spec:
+  selector:
+    matchLabels:
+      app: licensing-service
+  template:
+    metadata:
+      labels:
+        app: licensing-service
+    spec:
+      containers:
+      - name: smia-license-service
+        image: licensing-service
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: licensing-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: licensing-service
+  ports:
+    - port: 8080
