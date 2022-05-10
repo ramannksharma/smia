@@ -15,7 +15,7 @@ spec:
       - name: smia-configserver
         image: configserver
         ports:
-        - containerPort: 8080
+        - containerPort: 8071
 ---
 apiVersion: v1
 kind: Service
@@ -26,4 +26,4 @@ spec:
   selector:
     app: configserver
   ports:
-    - port: 8080
+    - port: 8071
