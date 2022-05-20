@@ -30,7 +30,6 @@ build:
 deploy:
   kubectl:
     manifests:
-      - ./k8s/postgres-server-external-deployment.yaml
       - ./k8s/config-server-deployment.yaml
       - ./k8s/license-service-deployment.yaml
       
