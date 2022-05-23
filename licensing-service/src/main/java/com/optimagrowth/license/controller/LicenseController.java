@@ -25,12 +25,12 @@ public class LicenseController {
 	private licenseService licenseService;
 
 	@RequestMapping(value="/{licenseId}",method = RequestMethod.GET)
-	public ResponseEntity<License> getLicense( @PathVariable("organizationId") String organizationId,
+	public ResponseEntity<License> getLicense( @PathVariable("organisationId") String organisationId,
 			@PathVariable("licenseId") String licenseId) {
 		
-		License license = licenseService.getLicense(licenseId, organizationId);
+		License license = licenseService.getLicense(licenseId, organisationId);
 		license.add( 
-				linkTo(methodOn(LicenseController.class).getLicense(organizationId, license.getLicenseId())).withSelfRel(),
+				linkTo(methodOn(LicenseController.class).getLicense(organisationId, license.getLicenseId())).withSelfRel(),
 				linkTo(methodOn(LicenseController.class).createLicense(license)).withRel("createLicense"),
 				linkTo(methodOn(LicenseController.class).updateLicense(license)).withRel("updateLicense"),
 				linkTo(methodOn(LicenseController.class).deleteLicense(license.getLicenseId())).withRel("deleteLicense")
